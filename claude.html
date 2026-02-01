@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bishnu's Memory Lane</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@700&family=Patrick+Hand&family=Poppins:wght@600&display=swap" rel="stylesheet">
+    
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
+    <style>
+        :root {
+            --bg-paper: #f4e4bc;
+            --card-bg: #fffbf0;
+            --ink: #2b2b2b;
+            --accent: #d35400;
+            --font-hand: 'Caveat', cursive;
+            --font-body: 'Patrick Hand', cursive;
+            --font-bold: 'Poppins', sans-serif;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            background-color: var(--bg-paper);
+            /* Vintage Paper Texture Overlay */
+            background-image: url("https://www.transparenttextures.com/patterns/aged-paper.png");
+            color: var(--ink);
+            font-family: var(--font-body);
+            overflow-x: hidden;
+        }
+
+        /* --- FLOATING ELEMENTS (Back by Popular Demand!) --- */
+        .floating-container {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            pointer-events: none; z-index: 0; overflow: hidden;
+        }
+        
+        .pastel-balloon {
+            position: absolute;
+            bottom: -100px;
+            width: 50px; height: 60px;
+            background: rgba(231, 76, 60, 0.6);
+            border-radius: 50%;
+            animation: floatUp 15s infinite linear;
+            box-shadow: inset -5px -5px 10px rgba(0,0,0,0.1);
+        }
+        .pastel-balloon::after {
+            content: ''; position: absolute; bottom: -20px; left: 50%; 
+            width: 2px; height: 30px; background: rgba(0,0,0,0.2);
+        }
+
+        @keyframes floatUp {
+            0% { transform: translateY(0) rotate(0deg); opacity: 0; }
+            10% { opacity: 0.8; }
+            100% { transform: translateY(-120vh) rotate(20deg); opacity: 0; }
+        }
+
+        /* --- CONTAINER --- */
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; position: relative; z-index: 2; }
+
+        /* --- HERO SECTION (THE CARD) --- */
+        .hero-section {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem 0;
+        }
+
+        .profile-card {
+            background: #fff;
+            padding: 1.5rem 1.5rem 3rem 1.5rem;
+            max-width: 450px;
+            width: 100%;
+            border-radius: 5px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.15);
+            transform: rotate(-2deg);
+            position: relative;
+            text-align: center;
+            border: 1px solid #ddd;
+        }
+        
+        /* The "Tape" at the top */
+        .profile-card::before {
+            content: ''; position: absolute; top: -15px; left: 50%; transform: translateX(-50%);
+            width: 150px; height: 40px;
+            background: rgba(255, 255, 255, 0.4);
+            border: 1px solid rgba(0,0,0,0.1);
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            backdrop-filter: blur(2px);
+            z-index: 5;
+        }
+
+        .profile-img-container {
+            width: 100%;
+            height: 400px; /* Tall portrait style */
+            background: #eee;
+            margin-bottom: 1.5rem;
+            overflow: hidden;
+            border: 1px solid #ccc;
+            position: relative;
+        }
+        
+        .profile-img { width: 100%; height: 100%; object-fit: cover; filter: sepia(10%); }
+
+        h1.hero-name {
+            font-family: var(--font-hand);
+            font-size: 3.5rem;
+            color: var(--ink);
+            line-height: 1;
+            margin-bottom: 0.5rem;
+        }
+        
+        .hero-tagline { font-size: 1.2rem; color: #666; letter-spacing: 1px; }
+
+        .scroll-btn {
+            margin-top: 2rem;
+            padding: 10px 30px;
+            background: var(--ink);
+            color: #fff;
+            border: none;
+            font-family: var(--font-bold);
+            cursor: pointer;
+            border-radius: 50px;
+            transition: 0.3s;
+        }
+        .scroll-btn:hover { background: var(--accent); transform: scale(1.05); }
+
+        /* --- WALL OF MEMORIES (15 PHOTOS) --- */
+        .gallery-section { padding: 4rem 0; }
+        .section-title {
+            text-align: center; font-family: var(--font-hand); font-size: 3rem; margin-bottom: 3rem;
+            text-decoration: underline; text-decoration-color: var(--accent);
+        }
+
+        /* MASONRY GRID LAYOUT */
+        .masonry-grid {
+            column-count: 3;
+            column-gap: 20px;
+        }
+        
+        .memory-item {
+            break-inside: avoid;
+            margin-bottom: 20px;
+            background: #fff;
+            padding: 10px 10px 40px 10px;
+            box-shadow: 3px 3px 10px rgba(0,0,0,0.1);
+            position: relative;
+            transition: transform 0.3s;
+        }
+        
+        .memory-item:hover { transform: scale(1.03); z-index: 10; box-shadow: 5px 10px 20px rgba(0,0,0,0.2); }
+        .memory-item img { width: 100%; border-radius: 2px; }
+        
+        .caption {
+            position: absolute; bottom: 10px; left: 0; width: 100%; text-align: center;
+            font-family: var(--font-hand); font-size: 1.5rem; color: #444;
+        }
+
+        /* Tape on photos */
+        .memory-item::after {
+            content: ''; position: absolute; top: -10px; left: 50%; transform: translateX(-50%);
+            width: 80px; height: 25px;
+            background: rgba(255,255,255,0.5); border: 1px solid rgba(0,0,0,0.1);
+        }
+
+        /* --- NOTE SECTION --- */
+        .note-section { padding: 4rem 0 8rem 0; text-align: center; }
+        .paper-note {
+            background: #fff;
+            padding: 3rem;
+            max-width: 700px;
+            margin: 0 auto;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transform: rotate(1deg);
+            position: relative;
+        }
+        .pin {
+            position: absolute; top: -15px; left: 50%; width: 20px; height: 20px;
+            background: var(--accent); border-radius: 50%;
+            box-shadow: 2px 2px 5px rgba(0,0,0,0.3);
+        }
+
+        /* --- MUSIC PLAYER --- */
+        .music-fab {
+            position: fixed; bottom: 30px; right: 30px;
+            width: 60px; height: 60px;
+            background: var(--ink); color: #fff;
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1.5rem; cursor: pointer; z-index: 100;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            transition: transform 0.3s;
+        }
+        .music-fab:hover { transform: rotate(360deg); background: var(--accent); }
+
+        @media (max-width: 900px) {
+            .masonry-grid { column-count: 2; }
+        }
+        @media (max-width: 600px) {
+            .masonry-grid { column-count: 1; }
+            h1.hero-name { font-size: 2.5rem; }
+            .profile-card { width: 95%; transform: rotate(0deg); }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="floating-container" id="bgDecor"></div>
+
+    <div class="music-fab" onclick="toggleMusic()" title="Play Music">🎵</div>
+    <audio id="bgMusic" loop>
+        <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+    </audio>
+
+    <div class="container">
+        
+        <section class="hero-section">
+            <div class="profile-card" data-aos="zoom-in">
+                <div class="profile-img-container">
+                    <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=1974&auto=format&fit=crop" class="profile-img" alt="Bishnu Profile">
+                </div>
+                <h1 class="hero-name">Bishnu Bhai</h1>
+                <p class="hero-tagline">Est. 19XX • The Legend Himself</p>
+                <div style="margin-top: 10px; font-size: 2rem;">🎂🎈✨</div>
+                
+                <button class="scroll-btn" onclick="document.getElementById('gallery').scrollIntoView()">OPEN THE VAULT</button>
+            </div>
+        </section>
+
+        <section class="gallery-section" id="gallery">
+            <h2 class="section-title" data-aos="fade-up">The Wall of Memories</h2>
+            
+            <div class="masonry-grid">
+                <div class="memory-item" data-aos="fade-up">
+                    <img src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?q=80&w=1000&auto=format&fit=crop">
+                    <div class="caption">Day 1</div>
+                </div>
+                <div class="memory-item" data-aos="fade-up" data-aos-delay="100">
+                    <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?q=80&w=1000&auto=format&fit=crop">
+                    <div class="caption">College Days</div>
+                </div>
+                <div class="memory-item" data-aos="fade-up" data-aos-delay="200">
+                    <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=1000&auto=format&fit=crop">
+                    <div class="caption">That Smile!</div>
+                </div>
+                <div class="memory-item" data-aos="fade-up">
+                    <img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?q=80&w=1000&auto=format&fit=crop">
+                    <div class="caption">Model Pose</div>
+                </div>
+                <div class="memory-item" data-aos="fade-up">
+                    <img src="https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?q=80&w=1000&auto=format&fit=crop">
+                    <div class="caption">Adventure</div>
+                </div>
+                <div class="memory-item" data-aos="fade-up">
+                    <img src="https://images.unsplash.com/photo-1488161628813-99c974c76949?q=80&w=1000&auto=format&fit=crop">
+                    <div class="caption">Bhai Bhai</div>
+                </div>
+                
+                <div class="memory-item" data-aos="fade-up"><img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=1000&auto=format&fit=crop"><div class="caption">Photo 7</div></div>
+                 <div class="memory-item" data-aos="fade-up"><img src="https://images.unsplash.com/photo-1501196354995-cbb51c65aaea?q=80&w=1000&auto=format&fit=crop"><div class="caption">Photo 8</div></div>
+                 <div class="memory-item" data-aos="fade-up"><img src="https://images.unsplash.com/photo-1463453091185-61582044d556?q=80&w=1000&auto=format&fit=crop"><div class="caption">Photo 9</div></div>
+                 <div class="memory-item" data-aos="fade-up"><img src="https://images.unsplash.com/photo-1524250502761-1ac6f2e30d43?q=80&w=1000&auto=format&fit=crop"><div class="caption">Photo 10</div></div>
+                 <div class="memory-item" data-aos="fade-up"><img src="https://images.unsplash.com/photo-1520342868574-5fa3804e551c?q=80&w=1000&auto=format&fit=crop"><div class="caption">Photo 11</div></div>
+                 <div class="memory-item" data-aos="fade-up"><img src="https://images.unsplash.com/photo-1531123897727-8f129e1688ce?q=80&w=1000&auto=format&fit=crop"><div class="caption">Photo 12</div></div>
+                 <div class="memory-item" data-aos="fade-up"><img src="https://images.unsplash.com/photo-1504593811423-6dd665756598?q=80&w=1000&auto=format&fit=crop"><div class="caption">Photo 13</div></div>
+                 <div class="memory-item" data-aos="fade-up"><img src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?q=80&w=1000&auto=format&fit=crop"><div class="caption">Photo 14</div></div>
+                 <div class="memory-item" data-aos="fade-up"><img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=1000&auto=format&fit=crop"><div class="caption">Photo 15</div></div>
+            </div>
+        </section>
+
+        <section class="note-section">
+            <div class="paper-note" data-aos="zoom-in-up">
+                <div class="pin"></div>
+                <h2 style="font-family: var(--font-hand); margin-bottom: 1rem;">To My Brother...</h2>
+                <p style="font-size: 1.2rem; line-height: 1.8;">
+                    From awkward smiles to legendary trips, we've come a long way. 
+                    Thank you for being the constant in my chaotic life. 
+                    Keep shining, keep smiling. Happy Birthday!
+                </p>
+                <div style="margin-top: 2rem;">
+                    <button class="scroll-btn" onclick="fireCelebration()">SEND LOVE ❤️</button>
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <script>
+        // 1. INIT AOS
+        AOS.init({ duration: 1000, once: false });
+
+        // 2. GENERATE PASTEL BALLOONS & SPARKS
+        const bg = document.getElementById('bgDecor');
+        const colors = ['rgba(231, 76, 60, 0.6)', 'rgba(241, 196, 15, 0.6)', 'rgba(52, 152, 219, 0.6)', 'rgba(155, 89, 182, 0.6)'];
+
+        for(let i=0; i<20; i++) {
+            let b = document.createElement('div');
+            b.className = 'pastel-balloon';
+            b.style.left = Math.random() * 100 + '%';
+            b.style.animationDuration = (Math.random() * 10 + 10) + 's';
+            b.style.animationDelay = (Math.random() * 5) + 's';
+            b.style.background = colors[Math.floor(Math.random() * colors.length)];
+            
+            // Random scaling
+            let scale = Math.random() * 0.5 + 0.5;
+            b.style.transform = `scale(${scale})`;
+            
+            bg.appendChild(b);
+        }
+
+        // 3. MUSIC TOGGLE
+        const music = document.getElementById('bgMusic');
+        let isPlaying = false;
+        function toggleMusic() {
+            if(!isPlaying) {
+                music.play();
+                isPlaying = true;
+                alert("Playing Music 🎵");
+            } else {
+                music.pause();
+                isPlaying = false;
+            }
+        }
+
+        // 4. CELEBRATION
+        function fireCelebration() {
+            var duration = 3 * 1000;
+            var animationEnd = Date.now() + duration;
+            var defaults = { startVelocity: 30, spread: 360, ticks: 60, zIndex: 999 };
+
+            var interval = setInterval(function() {
+                var timeLeft = animationEnd - Date.now();
+                if (timeLeft <= 0) return clearInterval(interval);
+                var particleCount = 50 * (timeLeft / duration);
+                
+                confetti(Object.assign({}, defaults, { 
+                    particleCount, 
+                    colors: ['#e74c3c', '#f1c40f', '#3498db'],
+                    origin: { x: Math.random(), y: Math.random() - 0.2 } 
+                }));
+            }, 250);
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bishnu's Spider-Verse Birthday</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Permanent+Marker&family=Poppins:wght@400;700;900&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
+    <style>
+        :root {
+            --spidey-red: #e62429;
+            --spidey-blue: #003b7a;
+            --spidey-dark: #0a0f1d;
+            --comic-yellow: #f9d923;
+            --web-white: #ffffff;
+            --font-comic: 'Bangers', cursive;
+            --font-graffiti: 'Permanent Marker', cursive;
+            --font-body: 'Poppins', sans-serif;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: var(--font-body);
+            background-color: var(--spidey-dark);
+            background-image: 
+                radial-gradient(circle at 20% 80%, rgba(230, 36, 41, 0.4) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(0, 59, 122, 0.4) 0%, transparent 50%),
+                repeating-linear-gradient(45deg, rgba(0,0,0,0.1) 0px, rgba(0,0,0,0.1) 2px, transparent 2px, transparent 10px);
+            color: white;
+            overflow-x: hidden;
+        }
+
+        /* --- FLOATING BACKGROUND --- */
+        .floating-container {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            pointer-events: none; z-index: 0; overflow: hidden;
+        }
+        .float-item {
+            position: absolute; font-size: 2rem; opacity: 0.6;
+            animation: floatUp 12s infinite linear;
+            filter: drop-shadow(0 0 5px rgba(255,255,255,0.3));
+        }
+        @keyframes floatUp {
+            0% { transform: translateY(110vh) rotate(0deg) scale(0.8); opacity: 0; }
+            10% { opacity: 0.7; }
+            90% { opacity: 0.7; }
+            100% { transform: translateY(-10vh) rotate(360deg) scale(1.2); opacity: 0; }
+        }
+
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; position: relative; z-index: 2; }
+
+        /* --- HERO SECTION --- */
+        .hero-section { min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 50px 0; }
+
+        .spidey-card {
+            background: rgba(20, 20, 30, 0.9);
+            border: 4px solid var(--spidey-red);
+            border-radius: 15px; padding: 3rem; text-align: center;
+            max-width: 500px; width: 100%; position: relative;
+            box-shadow: 10px 10px 0 var(--spidey-blue);
+            transform: rotate(-2deg);
+        }
+        .spidey-card::after {
+            content: '🕷️'; position: absolute; top: -20px; right: -20px; font-size: 4rem;
+            transform: rotate(20deg); filter: drop-shadow(2px 2px 0 var(--web-white));
+        }
+
+        .hero-img-container { width: 220px; height: 220px; margin: 0 auto 1.5rem; position: relative; }
+        .hero-img {
+            width: 100%; height: 100%; object-fit: cover; border-radius: 50%;
+            border: 6px solid var(--spidey-blue); box-shadow: 0 0 20px var(--spidey-red);
+        }
+
+        .hero-mask-icon {
+            position: absolute; bottom: 0; right: 0; font-size: 3rem; cursor: pointer;
+            transition: transform 0.2s; z-index: 10;
+        }
+        .hero-mask-icon:hover { transform: scale(1.2); }
+
+        h1.main-title {
+            font-family: var(--font-comic); font-size: 3.5rem; color: var(--comic-yellow);
+            text-shadow: 4px 4px 0 var(--spidey-red); line-height: 1; margin-bottom: 0.5rem;
+        }
+        .hero-subtitle { font-family: var(--font-graffiti); font-size: 1.2rem; letter-spacing: 1px; margin-bottom: 2rem; }
+
+        /* --- MARQUEE --- */
+        .marquee {
+            background: var(--comic-yellow); color: black; font-family: var(--font-comic);
+            padding: 10px 0; font-size: 1.5rem; letter-spacing: 1px;
+            border-top: 4px solid black; border-bottom: 4px solid black;
+            transform: rotate(2deg); margin: 3rem 0; z-index: 5;
+        }
+
+        /* --- VIDEO SECTION --- */
+        .video-section { padding: 4rem 0; text-align: center; }
+        .portal-frame {
+            padding: 10px;
+            background: linear-gradient(45deg, var(--spidey-red), var(--spidey-blue), var(--comic-yellow));
+            border-radius: 20px;
+            box-shadow: 0 0 40px var(--spidey-blue);
+            animation: portalPulse 3s infinite alternate;
+            max-width: 800px; margin: 0 auto;
+        }
+        @keyframes portalPulse { 
+            0% { box-shadow: 0 0 30px var(--spidey-red); filter: hue-rotate(0deg); } 
+            100% { box-shadow: 0 0 60px var(--spidey-blue); filter: hue-rotate(30deg); } 
+        }
+        .video-wrapper {
+            width: 100%; aspect-ratio: 16/9; background: black; border-radius: 15px; overflow: hidden;
+            border: 2px solid black;
+        }
+        .video-controls {
+            display: flex; justify-content: space-between; align-items: center;
+            margin-top: 15px; padding: 0 10px;
+        }
+        .video-btn {
+            background: var(--spidey-red); color: white; border: 3px solid black;
+            font-family: var(--font-comic); font-size: 1.2rem; padding: 10px 20px;
+            cursor: pointer; clip-path: polygon(10% 0, 100% 0, 90% 100%, 0% 100%);
+            transition: 0.2s;
+        }
+        .video-btn:hover { background: var(--comic-yellow); color: black; transform: scale(1.1); }
+        .video-label {
+            font-family: var(--font-comic); font-size: 1.5rem; color: var(--comic-yellow);
+            text-shadow: 2px 2px 0 var(--spidey-blue);
+        }
+
+        /* --- GALLERY GRID --- */
+        .gallery-section { padding: 3rem 0; }
+        .section-title {
+            font-family: var(--font-comic); font-size: 3rem; text-align: center; margin-bottom: 3rem;
+            color: var(--web-white); text-shadow: 3px 3px 0 var(--spidey-blue);
+        }
+        .gallery-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px;
+        }
+        .photo-frame {
+            background: white; padding: 5px; border-radius: 5px;
+            transition: transform 0.3s; position: relative; overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+        }
+        .photo-frame img { width: 100%; height: 250px; object-fit: cover; filter: grayscale(20%); transition: 0.5s; }
+        .photo-frame:hover { transform: scale(1.05); z-index: 10; border: 3px solid var(--comic-yellow); }
+        .photo-frame:hover img { filter: grayscale(0%); }
+
+        /* --- SQUAD WISHES SECTION (NEW) --- */
+        .squad-section { padding: 5rem 0; }
+        .squad-grid {
+            display: flex; flex-wrap: wrap; justify-content: center; gap: 30px;
+        }
+        .squad-card {
+            background: var(--spidey-dark);
+            border: 3px solid var(--spidey-blue);
+            border-radius: 15px;
+            padding: 20px;
+            width: 300px;
+            text-align: center;
+            position: relative;
+            box-shadow: 10px 10px 0 rgba(0,0,0,0.5);
+            transition: transform 0.3s;
+        }
+        .squad-card:hover { transform: translateY(-10px); }
+        
+        .squad-img {
+            width: 100px; height: 100px; border-radius: 50%; margin: 0 auto;
+            border: 4px solid var(--spidey-red); object-fit: cover;
+            background: #333; /* Placeholder color */
+        }
+        .squad-name {
+            font-family: var(--font-comic); font-size: 1.8rem; color: var(--comic-yellow);
+            margin: 10px 0; text-shadow: 2px 2px 0 black;
+        }
+        
+        /* Comic Speech Bubble */
+        .speech-bubble {
+            background: white; color: black; padding: 15px; border-radius: 10px;
+            position: relative; font-family: var(--font-body); font-weight: bold;
+            font-size: 0.9rem; border: 2px solid black; margin-top: 15px;
+        }
+        .speech-bubble::after {
+            content: ''; position: absolute; top: -10px; left: 50%; transform: translateX(-50%);
+            border-width: 0 10px 10px 10px; border-style: solid;
+            border-color: transparent transparent black transparent;
+        }
+        .speech-bubble::before {
+            content: ''; position: absolute; top: -7px; left: 50%; transform: translateX(-50%);
+            border-width: 0 10px 10px 10px; border-style: solid;
+            border-color: transparent transparent white transparent; z-index: 1;
+        }
+
+        /* --- WISH SECTION --- */
+        .wish-section { padding: 5rem 0; text-align: center; }
+        .wish-panel {
+            background: var(--spidey-blue); padding: 3rem; border-radius: 20px;
+            border: 4px solid var(--spidey-red); max-width: 600px; margin: 0 auto;
+            box-shadow: 15px 15px 0 var(--comic-yellow);
+        }
+        .wish-input {
+            width: 100%; padding: 15px; margin-top: 20px; font-family: var(--font-body); font-size: 1rem;
+            border: 3px solid black; border-radius: 10px;
+        }
+        .btn-spidey {
+            background: var(--spidey-red); color: white; padding: 1rem 2rem;
+            font-family: var(--font-comic); font-size: 1.5rem; letter-spacing: 1px;
+            border: 3px solid black; border-radius: 50px; cursor: pointer; transition: 0.3s; margin-top: 20px;
+            box-shadow: 5px 5px 0 black;
+        }
+        .btn-spidey:hover { transform: translate(-3px, -3px); box-shadow: 8px 8px 0 black; background: var(--comic-yellow); color: black; }
+
+        /* --- GLITCH CSS --- */
+        .glitch-active { animation: glitch 0.2s 5; filter: invert(1); }
+        @keyframes glitch { 0% { transform: translate(0); } 25% { transform: translate(-5px, 5px); } 50% { transform: translate(5px, -5px); } 75% { transform: translate(-5px, -5px); } 100% { transform: translate(0); } }
+
+        footer { text-align: center; padding: 3rem; font-family: var(--font-graffiti); color: #666; }
+    </style>
+</head>
+<body>
+
+    <div class="floating-container" id="bgDecor"></div>
+
+    <section class="hero-section">
+        <div class="spidey-card" data-aos="zoom-in">
+            <div class="hero-img-container">
+                <div class="hero-mask-icon" onclick="triggerGlitch()">🕸️</div>
+                <img src="WhatsApp Image 2026-02-01 at 8.29.46 PM.jpeg" class="hero-img" alt="Bishnu Profile">
+            </div>
+            <h1 class="main-title">HAPPY BIRTHDAY<br>BISHNU!</h1>
+            <p class="hero-subtitle">Friendly Neighborhood Legend</p>
+            <button onclick="shootWeb()" class="btn-spidey">ACTIVATE WEB SHOOTERS 🕸️</button>
+        </div>
+    </section>
+
+    <div class="marquee">
+        <marquee scrollamount="12">
+            BREAKING NEWS: BISHNU LEVELS UP! ★ SPIDER-VERSE CELEBRATES! ★ PARTY AT THE ROOFTOP! ★ WITH GREAT POWER COMES GREAT CAKE! ★
+        </marquee>
+    </div>
+
+    <section class="video-section container">
+        <h2 class="section-title" data-aos="fade-up">MULTIVERSE MEMORIES</h2>
+        <div class="portal-frame" data-aos="flip-up">
+            <div class="video-wrapper">
+                <iframe id="spiderFrame" width="100%" height="100%" src="WhatsApp Video 2026-02-01 at 9.31.57 PM.mp4" title="Video" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+            <div class="video-controls">
+                <button class="video-btn" onclick="changeVideo(-1)">❮ PREV</button>
+                <div class="video-label" id="videoCounter">MEMORY 1</div>
+                <button class="video-btn" onclick="changeVideo(1)">NEXT ❯</button>
+            </div>
+        </div>
+    </section>
+
+    <section class="gallery-section container">
+        <h2 class="section-title" data-aos="fade-down">INTO THE MEMORY-VERSE</h2>
+        <div class="gallery-grid">
+            <div class="photo-frame" data-aos="fade-up"><img src="WhatsApp Image 2026-02-01 at 8.52.54 PM.jpeg"></div>
+            <div class="photo-frame" data-aos="fade-up"><img src="WhatsApp Image 2026-02-01 at 3.43.54 PM.jpeg"></div>
+            <div class="photo-frame" data-aos="fade-up"><img src="WhatsApp Image 2026-02-01 at 6.48.04 PM.jpeg"></div>
+            <div class="photo-frame" data-aos="fade-up"><img src="WhatsApp Image 2026-02-01 at 3.43.56 PM.jpeg"></div>
+            <div class="photo-frame" data-aos="fade-up"><img src="WhatsApp Image 2026-02-01 at 6.48.03 PM.jpeg"></div>
+            <div class="photo-frame" data-aos="fade-up"><img src="WhatsApp Image 2026-02-01 at 6.50.01 PM.jpeg"></div>
+            <div class="photo-frame" data-aos="fade-up"><img src="WhatsApp Image 2026-02-01 at 6.50.02 PM.jpeg"></div>
+            <div class="photo-frame" data-aos="fade-up"><img src="WhatsApp Image 2026-02-01 at 6.48.04 PM.jpeg"></div>
+            <div class="photo-frame" data-aos="fade-up"><img src="WhatsApp Image 2026-02-01 at 6.46.47 PM.jpeg"></div>
+            <div class="photo-frame" data-aos="fade-up"><img src="WhatsApp Image 2026-02-01 at 3.43.53 PM.jpeg"></div>
+            <div class="photo-frame" data-aos="fade-up"><img src="WhatsApp Image 2026-02-01 at 9.45.20 PM.jpeg"></div>
+            <div class="photo-frame" data-aos="fade-up"><img src="WhatsApp Image 2026-02-01 at 8.52.59 PM.jpeg"></div>
+            <div class="photo-frame" data-aos="fade-up"><img src="WhatsApp Image 2026-02-01 at 8.52.58 PM.jpeg"></div>
+            <div class="photo-frame" data-aos="fade-up"><img src="WhatsApp Image 2026-02-01 at 9.45.22 PM.jpeg"></div>
+            <div class="photo-frame" data-aos="fade-up"><img src="WhatsApp Image 2026-02-01 at 9.45.23 PM.jpeg"></div>
+             <div class="photo-frame" data-aos="fade-up"><img src="WhatsApp Image 2026-02-01 at 8.52.55 PM.jpeg"></div>
+        </div>
+    </section>
+
+    <section class="squad-section container">
+        <h2 class="section-title" data-aos="fade-up" style="color: var(--comic-yellow);">FROM THE SQUAD HQ</h2>
+        
+        <div class="squad-grid">
+            
+            <div class="squad-card" data-aos="zoom-in" data-aos-delay="0">
+                <img src="WhatsApp Image 2026-02-01 at 11.46.24 PM.jpeg" class="squad-img" alt="Manish">
+                <h3 class="squad-name">MANISH</h3>
+                <div class="speech-bubble">
+                    "Happy Birthday, Brother! 🕸️ Swing high, dream big, and enjoy your day to the fullest. Always here for you"
+                </div>
+            </div>
+
+            <div class="squad-card" data-aos="zoom-in" data-aos-delay="200">
+                <img src="WhatsApp Image 2026-02-01 at 11.47.30 PM.jpeg" class="squad-img" alt="Roshan">
+                <h3 class="squad-name">ROSHAN</h3>
+                <div class="speech-bubble">
+                    "To the legend of our group—Happy Birthday! May your year be as epic as a Multiverse adventure."
+                </div>
+            </div>
+
+            <div class="squad-card" data-aos="zoom-in" data-aos-delay="400">
+                <img src="WhatsApp Image 2026-02-01 at 11.47.48 PM.jpeg" class="squad-img" alt="Ankit">
+                <h3 class="squad-name">ANKIT</h3>
+                <div class="speech-bubble">
+                    "Happy Birthday, Bishnu! May your life be filled with thrilling adventures and endless joy. Keep being awesome!"
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <section class="wish-section container">
+        <div class="wish-panel" data-aos="flip-up">
+            <h2 style="font-family: var(--font-comic); font-size: 2.5rem; color: var(--comic-yellow);">MAKE A WISH</h2>
+            <p>Write something for the future timeline...</p>
+            <textarea class="wish-input" id="wishText" rows="3" placeholder="Type your wish here, Hero..."></textarea>
+            <button class="btn-spidey" onclick="sendWish()">SEND TO MULTIVERSE 🚀</button>
+        </div>
+    </section>
+
+    <footer>
+        <p>Bishnu's Birthday © 2025</p>
+        <p style="font-size: 0.8rem;">(Secret: Press 'S' on your keyboard...)</p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <script>
+        AOS.init({ duration: 800 });
+
+        // Floating Background
+        const bgContainer = document.getElementById('bgDecor');
+        const items = ['🎈', '🕸️', '🕷️', '🔴', '🔵']; 
+        for(let i=0; i<30; i++) {
+            let el = document.createElement('div');
+            el.classList.add('float-item');
+            el.innerText = items[Math.floor(Math.random()*items.length)];
+            el.style.left = Math.random() * 100 + '%';
+            el.style.fontSize = (Math.random() * 2 + 1) + 'rem';
+            el.style.animationDuration = (Math.random() * 10 + 15) + 's';
+            el.style.animationDelay = (Math.random() * 5) + 's';
+            bgContainer.appendChild(el);
+        }
+
+        // Web Shooter
+        function shootWeb() {
+            var duration = 3 * 1000;
+            var end = Date.now() + duration;
+            var defaults = { startVelocity: 60, spread: 55, ticks: 200, zIndex: 9999, colors: ['#ffffff', '#e62429', '#003b7a'], shapes: ['circle', 'square'] };
+            var interval = setInterval(function() {
+                var timeLeft = end - Date.now();
+                if (timeLeft <= 0) return clearInterval(interval);
+                var particleCount = 50 * (timeLeft / duration);
+                confetti(Object.assign({}, defaults, { particleCount, origin: { x: 0, y: 1 }, angle: 60 }));
+                confetti(Object.assign({}, defaults, { particleCount, origin: { x: 1, y: 1 }, angle: 120 }));
+            }, 100);
+        }
+
+        // Video Slider
+        const videoList = [
+            "WhatsApp Video 2026-02-01 at 9.31.57 PM.mp4",
+            "WhatsApp Video 2026-02-01 at 10.29.09 PM.mp4",
+            "WhatsApp Video 2026-02-01 at 10.29.10 PM.mp4"
+        ];
+        let currentVideoIndex = 0;
+        const iframe = document.getElementById('spiderFrame');
+        const counter = document.getElementById('videoCounter');
+
+        function changeVideo(direction) {
+            currentVideoIndex += direction;
+            if (currentVideoIndex >= videoList.length) currentVideoIndex = 0;
+            else if (currentVideoIndex < 0) currentVideoIndex = videoList.length - 1;
+
+            iframe.style.opacity = 0;
+            setTimeout(() => {
+                iframe.src = videoList[currentVideoIndex];
+                counter.innerText = "MEMORY " + (currentVideoIndex + 1);
+                iframe.style.opacity = 1;
+            }, 300);
+        }
+
+        // Wish Logic
+        function sendWish() {
+            if(document.getElementById('wishText').value) {
+                alert("Wish Sent to Dimension Earth-616! 🕸️");
+                document.getElementById('wishText').value = "";
+                shootWeb();
+            } else { alert("Type a wish first!"); }
+        }
+
+        // Easter Eggs
+        function triggerGlitch() {
+            document.body.classList.add('glitch-active');
+            setTimeout(() => {
+                document.body.classList.remove('glitch-active');
+                alert("🕷️ SPIDER-SENSE TINGLING! 🕷️\nYou found Secret #1!");
+            }, 1000);
+        }
+
+        document.addEventListener('keydown', function(event) {
+            if (event.key.toLowerCase() === 's') {
+                alert("🕷️ SECRET UNLOCKED 🕷️\nMessage from Tony Stark:\n'Happy Birthday, Kid. Don't do anything I wouldn't do.'");
+                shootWeb();
+            }
+        });
+    </script>
+</body>
+</html>

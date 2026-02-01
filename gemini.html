@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bishnu's Spider-Verse Birthday</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Poppins:wght@400;700;900&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
+    <style>
+        :root {
+            /* SPIDER-MAN PALETTE */
+            --spidey-red: #e62429;
+            --spidey-blue: #003b7a;
+            --spidey-dark: #0a0f1d;
+            --comic-yellow: #f9d923;
+            --web-white: #ffffff;
+            --font-comic: 'Bangers', cursive;
+            --font-body: 'Poppins', sans-serif;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: var(--font-body);
+            background-color: var(--spidey-dark);
+            /* Radial Gradient + Subtle Brick Pattern Overlay */
+            background-image: 
+                radial-gradient(circle at 20% 80%, rgba(230, 36, 41, 0.5) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(0, 59, 122, 0.5) 0%, transparent 50%),
+                repeating-linear-gradient(45deg, rgba(0,0,0,0.1) 0px, rgba(0,0,0,0.1) 2px, transparent 2px, transparent 10px);
+            color: white;
+            overflow-x: hidden;
+        }
+
+        /* --- FLOATING WEB BACKGROUND --- */
+        .floating-container {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            pointer-events: none; z-index: 0; overflow: hidden;
+            /* Subtle overall web pattern */
+            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M30 30 L60 0 M30 30 L60 60 M30 30 L0 60 M30 30 L0 0' stroke='rgba(255,255,255,0.05)' stroke-width='1'/%3E%3C/svg%3E");
+        }
+
+        .float-item {
+            position: absolute;
+            font-size: 2rem;
+            opacity: 0.4;
+            animation: floatUp 15s infinite linear;
+            filter: drop-shadow(0 0 5px var(--spidey-blue));
+        }
+
+        @keyframes floatUp {
+            0% { transform: translateY(110vh) rotate(0deg) scale(0.8); opacity: 0; }
+            10% { opacity: 0.4; }
+            90% { opacity: 0.4; }
+            100% { transform: translateY(-10vh) rotate(360deg) scale(1.2); opacity: 0; }
+        }
+
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; position: relative; z-index: 2; }
+
+        /* --- HERO SECTION (Comic Panel) --- */
+        .hero-section {
+            min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 50px 0;
+        }
+
+        .comic-card {
+            background: rgba(10, 15, 29, 0.8);
+            /* Red and Blue border like a Spidey suit */
+            border-top: 5px solid var(--spidey-red);
+            border-bottom: 5px solid var(--spidey-blue);
+            border-left: 5px solid var(--spidey-red);
+            border-right: 5px solid var(--spidey-blue);
+            border-radius: 10px;
+            padding: 3rem;
+            text-align: center;
+            /* Comic book halftone dot effect */
+            background-image: radial-gradient(var(--spidey-blue) 1px, transparent 1px);
+            background-size: 10px 10px;
+            box-shadow: 0 0 50px rgba(230, 36, 41, 0.3);
+            max-width: 900px; width: 100%;
+            position: relative;
+        }
+        
+        /* Web decorations in corners of the card */
+        .comic-card::before { content: '🕸️'; position: absolute; top: 10px; left: 10px; font-size: 3rem; opacity: 0.5; }
+        .comic-card::after { content: '🕸️'; position: absolute; bottom: 10px; right: 10px; font-size: 3rem; opacity: 0.5; transform: rotate(180deg); }
+
+        h1.main-title {
+            font-family: var(--font-comic);
+            font-size: clamp(3rem, 6vw, 5rem);
+            color: var(--web-white);
+            /* Comic 3D text effect */
+            text-shadow: 3px 3px 0px var(--spidey-red), 6px 6px 0px var(--spidey-blue);
+            margin-bottom: 1rem;
+            line-height: 1.1;
+            letter-spacing: 2px;
+        }
+
+        .hero-img-container {
+            width: 250px; height: 250px; margin: 0 auto 2rem; position: relative;
+        }
+        .hero-img {
+            width: 100%; height: 100%; object-fit: cover;
+            border-radius: 50%;
+            border: 5px solid var(--spidey-red);
+            box-shadow: 0 0 30px var(--spidey-blue);
+        }
+        .hero-mask {
+            position: absolute; top: -30px; right: -20px; font-size: 5rem;
+            filter: drop-shadow(3px 3px 0 var(--spidey-red));
+            animation: hoverMask 3s infinite ease-in-out;
+        }
+        @keyframes hoverMask { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-15px); } }
+
+        /* --- MARQUEE (Daily Bugle Style) --- */
+        .marquee {
+            background: var(--comic-yellow);
+            color: black;
+            font-family: var(--font-comic);
+            padding: 10px 0; font-size: 1.5rem; letter-spacing: 1px;
+            border-top: 4px solid black; border-bottom: 4px solid black;
+            transform: rotate(-2deg); margin: 2rem 0; position: relative; z-index: 5;
+        }
+        /* ...keep marquee animation from previous code... */
+
+        /* --- VIDEO SECTION (Multiverse Portal) --- */
+        .video-section { padding: 5rem 0; text-align: center; }
+        .section-title {
+            font-family: var(--font-comic); font-size: 3rem; text-align: center; margin-bottom: 3rem;
+            color: var(--comic-yellow);
+            text-shadow: 2px 2px 0 var(--spidey-red);
+        }
+        
+        .portal-frame {
+            padding: 10px;
+            /* Glitchy Portal Border */
+            background: linear-gradient(45deg, var(--spidey-red), var(--spidey-blue), var(--comic-yellow));
+            border-radius: 20px;
+            box-shadow: 0 0 40px var(--spidey-blue);
+            animation: portalPulse 2s infinite;
+        }
+        @keyframes portalPulse { 50% { box-shadow: 0 0 60px var(--spidey-red); filter: hue-rotate(20deg); } }
+        
+        .video-wrapper {
+            width: 100%; max-width: 700px; aspect-ratio: 16/9; background: black; border-radius: 15px; overflow: hidden;
+        }
+
+        /* --- GALLERY (Webbed Photos) --- */
+        .gallery-section { padding: 5rem 0; }
+        .gallery-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px; }
+
+        .photo-card {
+            background: white; padding: 8px;
+            transform: rotate(2deg); transition: all 0.3s; position: relative;
+            box-shadow: 5px 5px 0px var(--spidey-dark);
+        }
+        /* The "Web" holding the photo */
+        .photo-card::before {
+            content: ''; position: absolute; top: -15px; left: 50%; transform: translateX(-50%);
+            width: 40px; height: 40px;
+            background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23ffffff' stroke='%23cccccc'%3E%3Cpath d='M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z'/%3E%3Cpath d='M12 4v16M4 12h16'/%3E%3C/svg%3E"); /* Simplified web icon */
+            background-size: contain; z-index: 5;
+        }
+        .photo-card:hover { transform: scale(1.05) rotate(0deg); z-index: 10; box-shadow: 0 0 30px var(--comic-yellow); }
+        .photo-card img { width: 100%; height: 300px; object-fit: cover; filter: sepia(20%); }
+        .photo-caption { color: black; font-family: var(--font-comic); text-align: center; font-size: 1.2rem; margin-top: 5px; }
+
+        /* --- WISH SECTION --- */
+        .wish-section { padding: 8rem 0; text-align: center; }
+        .wish-box {
+            background: var(--spidey-blue);
+            color: white; display: inline-block; padding: 3rem; font-size: 1.5rem;
+            border: 4px solid var(--spidey-red);
+            font-weight: 800; max-width: 800px;
+            position: relative;
+            box-shadow: 10px 10px 0 var(--spidey-dark);
+        }
+        /* Comic Speech Bubble tail */
+        .wish-box::after {
+            content: ''; position: absolute; bottom: -30px; left: 50%;
+            border-width: 30px 30px 0; border-style: solid;
+            border-color: var(--spidey-blue) transparent; display: block; width: 0;
+        }
+
+        /* --- SPIDEY BUTTON --- */
+        .btn-spidey {
+            background: var(--spidey-red); color: white; padding: 1rem 2.5rem;
+            font-family: var(--font-comic); font-size: 1.5rem; letter-spacing: 1px;
+            border: none; clip-path: polygon(10% 0, 100% 0, 90% 100%, 0% 100%); /* Dynamic shape */
+            cursor: pointer; transition: 0.3s; margin-top: 30px;
+        }
+        .btn-spidey:hover { background: var(--comic-yellow); color: var(--spidey-dark); transform: scale(1.1); }
+
+    </style>
+</head>
+<body>
+
+    <div class="floating-container" id="bgDecor">
+        </div>
+
+    <section class="hero-section">
+        <div class="comic-card" data-aos="zoom-in">
+            <div class="hero-img-container">
+                <div class="hero-mask">🕷️</div>
+                <img src="WhatsApp Image 2026-02-01 at 8.29.46 PM.jpeg" class="hero-img" alt="Bishnu">
+            </div>
+            <h1 class="main-title">WELCOME TO THE<br>SPIDER-VERSE<br>BISHNU!</h1>
+            <p style="font-size: 1.3rem; margin-bottom: 2rem; font-weight: bold;">"With great power comes a great birthday party."</p>
+            <button onclick="shootWeb()" class="btn-spidey">ACTIVATE WEB SHOOTERS!</button>
+        </div>
+    </section>
+
+    <div class="marquee">
+        <marquee scrollamount="10">
+            DAILY BUGLE EXCLUSIVE: BISHNU TURNS ANOTHER YEAR OLDER! ★★ HERO OR MENACE? ★★ SPIDER-MAN SPOTTED AT THE PARTY! ★★ 
+        </marquee>
+    </div>
+
+    <section class="video-section container">
+        <h2 class="section-title" data-aos="fade-up">MULTIVERSE MEMORIES</h2>
+        <div class="portal-frame" data-aos="flip-up">
+            <div class="video-wrapper">
+                <iframe width="100%" height="100%" src="https://www.youtube.com/embed/MultiVerseVideoID" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+        </div>
+    </section>
+
+    <section class="gallery-section container">
+        <h2 class="section-title" data-aos="fade-right">YOUR AMAZING FRIENDS</h2>
+        <div class="gallery-grid">
+            <div class="photo-card" data-aos="fade-up"><img src=""><div class="photo-caption">The Avengers Squad</div></div>
+            <div class="photo-card" data-aos="fade-up" data-aos-delay="100"><img src="https://images.unsplash.com/photo-1525268771113-32d9e9021a97?q=80&w=2080&auto=format&fit=crop"><div class="photo-caption">Peter Parker Vibes</div></div>
+            <div class="photo-card" data-aos="fade-up" data-aos-delay="200"><img src="https://images.unsplash.com/photo-1511632765486-a01980e01a18?q=80&w=2070&auto=format&fit=crop"><div class="photo-caption">Chilling on Rooftops</div></div>
+            </div>
+    </section>
+
+    <section class="wish-section">
+        <div class="container" data-aos="zoom-in-up">
+            <div class="wish-box">
+                "Happy Birthday Bishnu! Remember, you're getting stronger every year. Keep swinging high and being the hero of your own story!"
+            </div>
+        </div>
+    </section>
+
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <script>
+        // 1. INITIALIZE ANIMATIONS
+        AOS.init({ duration: 800 });
+
+        // 2. GENERATE SPIDER-VERSE BACKGROUND
+        const bgContainer = document.getElementById('bgDecor');
+        const icons = ['🕸️', '🕷️', '🏙️']; // Web, Spider, City
+
+        for(let i=0; i<30; i++) {
+            let el = document.createElement('div');
+            el.classList.add('float-item');
+            el.innerText = icons[Math.floor(Math.random()*icons.length)];
+            el.style.left = Math.random() * 100 + '%';
+            // Random size between 1rem and 3rem
+            el.style.fontSize = (Math.random() * 2 + 1) + 'rem';
+            el.style.animationDuration = (Math.random() * 10 + 15) + 's';
+            el.style.animationDelay = (Math.random() * 5) + 's';
+            // Random rotation direction
+            el.style.animationDirection = Math.random() > 0.5 ? 'normal' : 'reverse';
+            bgContainer.appendChild(el);
+        }
+
+        // 3. WEB SHOOTER FUNCTION (Replaces Confetti)
+        function shootWeb() {
+            // We use confetti but make it look like webbing (white lines and dots)
+            var duration = 3 * 1000;
+            var animationEnd = Date.now() + duration;
+            var defaults = { startVelocity: 45, spread: 360, ticks: 100, zIndex: 9999 };
+
+            var interval = setInterval(function() {
+                var timeLeft = animationEnd - Date.now();
+                if (timeLeft <= 0) return clearInterval(interval);
+                var particleCount = 100 * (timeLeft / duration);
+                
+                // Shoot white "webbing" from both sides
+                confetti(Object.assign({}, defaults, { 
+                    particleCount, 
+                    color: '#ffffff', // White webbing
+                    shapes: ['circle', 'square'], // Mix shapes for messy web look
+                    gravity: 2, // Falls faster like heavy web fluid
+                    origin: { x: 0, y: 0.8 } // From bottom left
+                }));
+                 confetti(Object.assign({}, defaults, { 
+                    particleCount, 
+                    color: '#ffffff',
+                    shapes: ['circle', 'square'],
+                    gravity: 2,
+                    origin: { x: 1, y: 0.8 } // From bottom right
+                }));
+            }, 100);
+        }
+    </script>
+</body>
+</html>
